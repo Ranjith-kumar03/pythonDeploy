@@ -3,21 +3,21 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class User(db.Model):
-    def __init__(self,name, age , address , product):
+    def __init__(self,name, email , address , product):
         self.name = name
-        self.age = age
+        self.email = email
         self.address= address
         self.product = product
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(54), required= True , unique= True)
-    age = db.Column(db.Integer, default = 0)
-    address = db.Column(db.String(154), required= True , unique= False)
-    product = db.Column(db.String(54), required= True , unique= True)
+    name = db.Column(db.String(54),  unique= True)
+    email = db.Column(db.String(54), default = 0)
+    address = db.Column(db.String(154),  unique= False)
+    product = db.Column(db.String(54),  unique= True)
 
 
     def json(self):
-        return {"id":self.id,"name":self.name,"age":self.age,"address":self.address,"product":self.product}
+        return {"id":self.id,"name":self.name,"email":self.email,"address":self.address,"product":self.product}
 
 
 class Product(db.Model):
@@ -27,13 +27,12 @@ class Product(db.Model):
         self.ifetime= lifetime
         
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(54), required= True , unique= True)
-    age = db.Column(db.Integer, default = 0)
-    sno = db.Column(db.String(154), required= True , unique= False)
-    lifetime = db.Column(db.String(54), required= True , unique= True)
+    name = db.Column(db.String(54),  unique= True)
+    sno = db.Column(db.String(154),  unique= True)
+    lifetime = db.Column(db.String(54),  unique= True)
 
 
     def json(self):
-        return {"id":self.id,"name":self.name,"age":self.age,"address":self.address,"product":self.product}
+        return {"id":self.id,"name":self.name,"sno":self.sno,"lifetime":self.lifetime}
 
         
